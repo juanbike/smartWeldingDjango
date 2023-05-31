@@ -3,5 +3,5 @@ from smartwelding.models import *
 
 # Register your models here.
 
-admin.site.register(Soldadores)
-
+admin.site.register(Soldador)
+admin.site.register(Empresa)
