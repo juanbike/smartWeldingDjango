@@ -145,26 +145,36 @@ class PruebaHidrostatica(models.Model):
     tipo = models.CharField(30)
     clase = models.CharField(30)
     diametro = models.CharField(30)
-    tramoKm = models.IntegerField()
-    alKm = models.IntegerField()
-    longitud = models.IntegerField()
-    uniones = models.IntegerField()
-    temperaturaAmbiente = models.FloatField()
-    presionPrueba = models.FloatField()
-    perdidasPermisibles = models.FloatField()
-    capacidadManometros = models.FloatField()
-    capacidadBomba = models.FloatField()
-    fugaDetectadakm1 = models.FloatField()
-    fugaDetectadakm2 = models.FloatField()
-    fugaDetectadakm3 = models.FloatField()
-    fugaDetectadakm4 = models.FloatField()
-    presionesAlcanzadas = models.CharField(200)
-    fugarMayores = models.CharField(200)
-    descripcionFuga = models.CharField(200)
-    accionesCorrectivas = models.CharField(200)
-    dictamen = models.CharField(200)
+    tramoKm = models.IntegerField(default=1, null=False, blank=False) #NO ACEPTA VALORES NULOS NI VACIOS
+    alKm = models.IntegerField(default=1, null=False, blank=False)
+    longitud = models.IntegerField(default=1, null=False, blank=False)
+    uniones = models.IntegerField(default=1, null=False, blank=False)
+    temperaturaAmbiente = models.FloatField(default=1.1, null=False, blank=False)
+    presionPrueba = models.FloatField(default=1.1, null=False, blank=False)
+    perdidasPermisibles = models.FloatField(default=1.1, null=False, blank=False)
+    capacidadManometros = models.FloatField(default=1.1, null=False, blank=False)
+    capacidadBomba = models.FloatField(default=1.1, null=False, blank=False)
+    fugaDetectadakm1 = models.FloatField(default=1.1, null=False, blank=False)
+    fugaDetectadakm2 = models.FloatField(default=1.1, null=False, blank=False)
+    fugaDetectadakm3 = models.FloatField(default=1.1, null=False, blank=False)
+    fugaDetectadakm4 = models.FloatField(default=1.1, null=False, blank=False)
+    presionesAlcanzadas = models.CharField(200, default="Indique presion", null=False, blank=False)
+    fugarMayores = models.CharField(200, default="Indique fuga", null=False, blank=False)
+    descripcionFuga = models.CharField(200, default="Descripcion fuga ", null=False, blank=False)
+    accionesCorrectivas = models.CharField(200, default="Acción correctiva", null=False, blank=False)
+    dictamen = models.CharField(200, default="Dictamen", null=False, blank=False)
     creado = models.DateTimeField(auto_now=True)
 
 def __str__(self):
         return f"{self.nombreInspector} {self.apellidoInspector}"
+
+
+class Proyecto(models.Model):
+    fecha = models.DateField()
+    nombre = models.CharField(50)
+    lugar = models.CharField(40)
+
+def __str__(self):
+        return f"{self.nombre}"    
+
 

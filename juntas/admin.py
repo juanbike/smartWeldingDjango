@@ -5,3 +5,5 @@ from smartwelding.models import *
 
 admin.site.register(Soldador)
 admin.site.register(Empresa)
+admin.site.register(Usuario)
+admin.site.register(Cliente)
