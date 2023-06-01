@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+
+
 class Usuario(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
@@ -9,6 +11,7 @@ class Usuario(models.Model):
 
     def __str__(self):
         return f"{self.nombre} {self.apellido} {self.telefono}"
+
 
 class Cliente(models.Model):
     nombre = models.CharField(max_length=50)
@@ -19,7 +22,6 @@ class Cliente(models.Model):
 
     def __str__(self):
         return f"{self.nombre} {self.apellido} {self.telefono}"
-
 
 
 class Soldador(models.Model):
@@ -36,7 +38,6 @@ class Soldador(models.Model):
         return f"{self.nombre} {self.apellido} {self.telefono}"
 
 
-
 class Empresa(models.Model):
     nombre = models.CharField(max_length=50)
     direccion = models.CharField(max_length=200)
@@ -47,35 +48,38 @@ class Empresa(models.Model):
 
     def __str__(self):
         return f"{self.nombre} {self.telefono}"
-    
+
+
 class Linea(models.Model):
     linea = models.CharField(max_length=100)
-    creado = models.DateTimeField(auto_now=True)   
+    creado = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.linea}"
-    
+
 
 class Especificacion(models.Model):
-    especificacion =  models.CharField(max_length=30) 
+    especificacion = models.CharField(max_length=30)
     creado = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.especificacion}"
-    
+
+
 class Materiales(models.Model):
     tipo = models.CharField(max_length=40)
     shedule = models.CharField(max_length=4)
     tipoExtremo = models.CharField(max_length=15)
-    tipoMaterial = models.CharField(max_length=30)     
+    tipoMaterial = models.CharField(max_length=30)
     material = models.CharField(max_length=30)
     creado = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.tipo} {self.tipoMaterial}"
-    
+
+
 class Diametros(models.Model):
-    nominal = models.CharField(max_length=4)
+    nominal = models.CharField(max_length=8)
     nominal1 = models.FloatField()
     creado = models.DateTimeField(auto_now=True)
 
@@ -92,44 +96,48 @@ class PulgadasDiametrales(models.Model):
         return f"{self.factorPulgadasDiametrales} {self.pulgadasDiametrales}"
 
 
-
 class MaterialesConsumidos(models.Model):
     tipoC = models.CharField(max_length=40)
     sheduleC = models.CharField(max_length=4)
     tipoExtremoC = models.CharField(max_length=15)
-    tipoMaterialC = models.CharField(max_length=30)     
+    tipoMaterialC = models.CharField(max_length=30)
     materialC = models.CharField(max_length=30)
     creado = models.DateTimeField(auto_now=True)
 
+
 def __str__(self):
     return f"{self.tipoc} {self.tipoMaterialc}"
+
 
 class MaterialesEntregados(models.Model):
     tipoE = models.CharField(max_length=40)
     sheduleE = models.CharField(max_length=4)
     tipoExtremoE = models.CharField(max_length=15)
-    tipoMaterialE = models.CharField(max_length=30)     
+    tipoMaterialE = models.CharField(max_length=30)
     materialE = models.CharField(max_length=30)
     creado = models.DateTimeField(auto_now=True)
+
 
 def __str__(self):
     return f"{self.tipoE} {self.tipoMaterialE}"
 
+
 class junta(models.Model):
-   tipoJunta = models.CharField(max_length=20)
-   linea = models.CharField(max_length=100)
-   especificacion =  models.CharField(max_length=30)
-   tipo = models.CharField(max_length=40)
-   shedule = models.CharField(max_length=4)
-   tipoExtremo = models.CharField(max_length=15)
-   tipoMaterial = models.CharField(max_length=30)     
-   material = models.CharField(max_length=30)
-   nominal = models.CharField(max_length=4)
-   nominal1 = models.FloatField()
-   factorPulgadasDiametrales = models.FloatField()
-   pulgadasDiametrales = models.FloatField()
-   pulgadasContabilizadas = models.IntegerField()
-   creado = models.DateTimeField(auto_now=True)
+    tipoJunta = models.CharField(max_length=20)
+    linea = models.CharField(max_length=100)
+    especificacion = models.CharField(max_length=30)
+    tipo = models.CharField(max_length=40)
+    shedule = models.CharField(max_length=4)
+    tipoExtremo = models.CharField(max_length=15)
+    tipoMaterial = models.CharField(max_length=30)
+    material = models.CharField(max_length=30)
+    nominal = models.CharField(max_length=4)
+    nominal1 = models.FloatField()
+    factorPulgadasDiametrales = models.FloatField()
+    pulgadasDiametrales = models.FloatField()
+    pulgadasContabilizadas = models.IntegerField()
+    creado = models.DateTimeField(auto_now=True)
+
 
 def __str__(self):
     return f"{self.tipoJunta} {self.Material}"
@@ -145,28 +153,38 @@ class PruebaHidrostatica(models.Model):
     tipo = models.CharField(30)
     clase = models.CharField(30)
     diametro = models.CharField(30)
-    tramoKm = models.IntegerField(default=1, null=False, blank=False) #NO ACEPTA VALORES NULOS NI VACIOS
+    # NO ACEPTA VALORES NULOS NI VACIOS
+    tramoKm = models.IntegerField(default=1, null=False, blank=False)
     alKm = models.IntegerField(default=1, null=False, blank=False)
     longitud = models.IntegerField(default=1, null=False, blank=False)
     uniones = models.IntegerField(default=1, null=False, blank=False)
-    temperaturaAmbiente = models.FloatField(default=1.1, null=False, blank=False)
+    temperaturaAmbiente = models.FloatField(
+        default=1.1, null=False, blank=False)
     presionPrueba = models.FloatField(default=1.1, null=False, blank=False)
-    perdidasPermisibles = models.FloatField(default=1.1, null=False, blank=False)
-    capacidadManometros = models.FloatField(default=1.1, null=False, blank=False)
+    perdidasPermisibles = models.FloatField(
+        default=1.1, null=False, blank=False)
+    capacidadManometros = models.FloatField(
+        default=1.1, null=False, blank=False)
     capacidadBomba = models.FloatField(default=1.1, null=False, blank=False)
     fugaDetectadakm1 = models.FloatField(default=1.1, null=False, blank=False)
     fugaDetectadakm2 = models.FloatField(default=1.1, null=False, blank=False)
     fugaDetectadakm3 = models.FloatField(default=1.1, null=False, blank=False)
     fugaDetectadakm4 = models.FloatField(default=1.1, null=False, blank=False)
-    presionesAlcanzadas = models.CharField(200, default="Indique presion", null=False, blank=False)
-    fugarMayores = models.CharField(200, default="Indique fuga", null=False, blank=False)
-    descripcionFuga = models.CharField(200, default="Descripcion fuga ", null=False, blank=False)
-    accionesCorrectivas = models.CharField(200, default="Acción correctiva", null=False, blank=False)
-    dictamen = models.CharField(200, default="Dictamen", null=False, blank=False)
+    presionesAlcanzadas = models.CharField(
+        200, default="Indique presion", null=False, blank=False)
+    fugarMayores = models.CharField(
+        200, default="Indique fuga", null=False, blank=False)
+    descripcionFuga = models.CharField(
+        200, default="Descripcion fuga ", null=False, blank=False)
+    accionesCorrectivas = models.CharField(
+        200, default="Acción correctiva", null=False, blank=False)
+    dictamen = models.CharField(
+        200, default="Dictamen", null=False, blank=False)
     creado = models.DateTimeField(auto_now=True)
 
+
 def __str__(self):
-        return f"{self.nombreInspector} {self.apellidoInspector}"
+    return f"{self.nombreInspector} {self.apellidoInspector}"
 
 
 class Proyecto(models.Model):
@@ -174,7 +192,6 @@ class Proyecto(models.Model):
     nombre = models.CharField(50)
     lugar = models.CharField(40)
 
+
 def __str__(self):
-        return f"{self.nombre}"    
-
-
+    return f"{self.nombre}"
