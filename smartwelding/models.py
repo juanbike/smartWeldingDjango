@@ -6,6 +6,8 @@ from django.db import models
 class Usuario(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
+    rol = models.CharField(
+        max_length=25, default='Normal', null=False, blank=False)
     telefono = models.CharField(max_length=20)
     creado = models.DateTimeField(auto_now=True)
 
@@ -110,6 +112,8 @@ def __str__(self):
 
 
 class MaterialesEntregados(models.Model):
+    coladaE = models.CharField(
+        max_length=10, default='00000000', null=False, blank=False)
     tipoE = models.CharField(max_length=40)
     sheduleE = models.CharField(max_length=4)
     tipoExtremoE = models.CharField(max_length=15)
@@ -141,6 +145,48 @@ class junta(models.Model):
 
 def __str__(self):
     return f"{self.tipoJunta} {self.Material}"
+
+
+class juntaAprobada(models.Model):
+    linea = models.CharField(
+        max_length=100, default='Falta la linea', null=False, blank=False)
+    especificacion = models.CharField(max_length=30,  null=False, blank=False)
+    tipo = models.CharField(max_length=40,  null=False, blank=False)
+    shedule = models.CharField(max_length=4,  null=False, blank=False)
+    tipoExtremo = models.CharField(max_length=15,  null=False, blank=False)
+    tipoMaterial = models.CharField(max_length=30,  null=False, blank=False)
+    material = models.CharField(max_length=30,  null=False, blank=False)
+    nominal = models.CharField(max_length=4,  null=False, blank=False)
+    nominal1 = models.FloatField(null=False, blank=False)
+    factorPulgadasDiametrales = models.FloatField(null=False, blank=False)
+    pulgadasDiametrales = models.FloatField(null=False, blank=False)
+    pulgadasContabilizadas = models.IntegerField(null=False, blank=False)
+    creado = models.DateTimeField(auto_now=True)
+
+
+def __str__(self):
+    return f"{self.linea} {self.creado}"
+
+
+class juntaRechazada(models.Model):
+    linea = models.CharField(
+        max_length=100, default='Falta la linea', null=False, blank=False)
+    especificacion = models.CharField(max_length=30,  null=False, blank=False)
+    tipo = models.CharField(max_length=40,  null=False, blank=False)
+    shedule = models.CharField(max_length=4,  null=False, blank=False)
+    tipoExtremo = models.CharField(max_length=15,  null=False, blank=False)
+    tipoMaterial = models.CharField(max_length=30,  null=False, blank=False)
+    material = models.CharField(max_length=30,  null=False, blank=False)
+    nominal = models.CharField(max_length=4,  null=False, blank=False)
+    nominal1 = models.FloatField(null=False, blank=False)
+    factorPulgadasDiametrales = models.FloatField(null=False, blank=False)
+    pulgadasDiametrales = models.FloatField(null=False, blank=False)
+    pulgadasContabilizadas = models.IntegerField(null=False, blank=False)
+    creado = models.DateTimeField(auto_now=True)
+
+
+def __str__(self):
+    return f"{self.linea} {self.creado}"
 
 
 class PruebaHidrostatica(models.Model):
@@ -195,3 +241,14 @@ class Proyecto(models.Model):
 
 def __str__(self):
     return f"{self.nombre}"
+
+
+class Inspector(models.Model):
+    nombre = models.CharField(max_length=50)
+    apellido = models.CharField(max_length=50)
+    telefono = models.CharField(max_length=20)
+    telefono2 = models.CharField(max_length=20)
+    creado = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.nombre} {self.apellido} {self.telefono}"
