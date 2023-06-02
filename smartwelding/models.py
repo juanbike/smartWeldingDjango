@@ -106,7 +106,7 @@ class MaterialesConsumidos(models.Model):
 
 
 def __str__(self):
-    return f"{self.tipoc} {self.tipoMaterialc}"
+    return f"{self.tipoc} {self.shedule} {self.tipoEstremoC} {self.tipoMaterialc} {self.materialC}"
 
 
 class MaterialesEntregados(models.Model):
