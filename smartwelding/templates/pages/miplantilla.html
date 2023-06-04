@@ -1,10 +1,36 @@
+{% load bootstrap5 %}
 <!DOCTYPE html>
 <html>
 <head>
+    {% bootstrap_css %}
   <title>Mi plantilla en Django</title>
 </head>
 <body>
-  <h1>{{ titulo }}</h1>
-  <p>{{ contenido }}</p>
+
+    
+
+
+
+<div class="d-flex align-items-center">
+    
+    <div class="col-3">
+        <h1>Inspectores</h1>
+        <select class="form-select me-3" aria-label="Default select example">
+            {% for inspector in inspectores %}
+            <option value={{ inspector.nombre }}>{{ inspector.nombre }} - {{ inspector.apellido }}</option>
+        {% endfor %}
+        </select>
+    </div>
+    
+    <div class="col-3">
+        <h1>Soldadores</h1>
+        <select class="form-select me-3" aria-label="Default select example">
+            {% for soldador in soldadores %}
+            <option value={{ soldador.nombre }}>{{ soldador.nombre }} - {{ soldador.apellido }}</option>
+        {% endfor %}
+        </select>
+    </div>
+</div>
+{% bootstrap_javascript %}
 </body>
 </html>
