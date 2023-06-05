@@ -70,6 +70,8 @@ class Especificacion(models.Model):
 
 class Materiales(models.Model):
     tipo = models.CharField(max_length=40)
+    colada = models.CharField(
+        max_length=10, default='00000000', null=False, blank=False)
     shedule = models.CharField(max_length=4)
     tipoExtremo = models.CharField(max_length=15)
     tipoMaterial = models.CharField(max_length=30)
@@ -99,6 +101,8 @@ class PulgadasDiametrales(models.Model):
 
 
 class MaterialesConsumidos(models.Model):
+    coladaC = models.CharField(
+        max_length=10, default='00000000', null=False, blank=False)
     tipoC = models.CharField(max_length=40)
     sheduleC = models.CharField(max_length=4)
     tipoExtremoC = models.CharField(max_length=15)
