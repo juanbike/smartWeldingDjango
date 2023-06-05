@@ -1,0 +1,68 @@
+{% load bootstrap5 %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'flatpickr/flatpickr.min.css' %}">
+  <script src="{% static 'flatpickr/flatpickr.js' %}"></script>
+  <title>Mi plantilla en Django</title>
+  
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1 class="text-center display-4">Minuta de Entrega de Materiales</h1>
+          </div>
+        </div>
+      </div>
+
+
+
+<div class="d-flex justify-content-center">
+    
+    <div class="col-3 p-1">
+        <h1>Inspectores</h1>
+        <select class="form-select me-3" aria-label="Default select example">
+            {% for inspector in inspectores %}
+            <option value={{ inspector.nombre }}>{{ inspector.nombre }} - {{ inspector.apellido }}</option>
+        {% endfor %}
+        </select>
+    </div>
+    
+    <div class="col-3 p-1">
+        <h1>Soldadores</h1>
+        <select class="form-select me-3" aria-label="Default select example">
+            {% for soldador in soldadores %}
+            <option value={{ soldador.nombre }}>{{ soldador.nombre }} - {{ soldador.apellido }}</option>
+        {% endfor %}
+        </select>
+    </div>
+   
+    <div class="col-2 p-1">
+        <h1>Fecha</h1>
+        <input type="text" class="form-control" id="fecha" name="fecha" placeholder="Selecciona una fecha" data-input>
+    </div>    
+  
+</div>
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <h1 class="text-center display-4">Agregar Materiales</h1>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    flatpickr('#fecha', {
+      dateFormat: 'd-m-y',
+      minDate: 'today'
+    });
+  </script>
+{% bootstrap_javascript %}
+
+</body>
+</html>
