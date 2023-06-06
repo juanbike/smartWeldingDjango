@@ -115,7 +115,26 @@ def __str__(self):
     return f"{self.tipoc} {self.shedule} {self.tipoEstremoC} {self.tipoMaterialc} {self.materialC}"
 
 
+class Inspector(models.Model):
+    nombre = models.CharField(max_length=50)
+    apellido = models.CharField(max_length=50)
+    telefono = models.CharField(max_length=20)
+    telefono2 = models.CharField(max_length=20)
+    creado = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.nombre} {self.apellido} {self.telefono}"
+
+
+
+
+
 class MaterialesEntregados(models.Model):
+    nombreInspector = models.CharField(max_length=50, default='', null=False, blank=False)
+    apellidoInspector = models.CharField(max_length=50, default='', null=False, blank=False)
+    nombreSoldador = models.CharField(max_length=50, default='', null=False, blank=False)
+    apellidoSoldador = models.CharField(max_length=50, default='', null=False, blank=False)
+    nombreProyecto = models.CharField(50, default='', null=False, blank=False)
     coladaE = models.CharField(
         max_length=10, default='00000000', null=False, blank=False)
     tipoE = models.CharField(max_length=40)
@@ -124,6 +143,8 @@ class MaterialesEntregados(models.Model):
     tipoMaterialE = models.CharField(max_length=30)
     materialE = models.CharField(max_length=30)
     creado = models.DateTimeField(auto_now=True)
+    #Relacionamos MaterialesEntregados con inspector: Un inspector tiene uno o muchos materiales entregados a los soldadores
+    inspector = models.ForeignKey(Inspector, on_delete=models.CASCADE)
 
 
 def __str__(self):
@@ -247,12 +268,3 @@ def __str__(self):
     return f"{self.nombre}"
 
 
-class Inspector(models.Model):
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
-    telefono = models.CharField(max_length=20)
-    telefono2 = models.CharField(max_length=20)
-    creado = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"{self.nombre} {self.apellido} {self.telefono}"
