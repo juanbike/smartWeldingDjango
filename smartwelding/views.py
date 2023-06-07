@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from smartwelding.models import Soldador, Inspector
 
+
 """"
 def miplantilla(request):
     titulo = 'Bienvenidos a mi vista'
@@ -15,3 +16,4 @@ def miplantilla(request):
     soldadores = Soldador.objects.all()
     print(inspectores)
     return render(request, 'pages/miplantilla.html', {'inspectores': inspectores, 'soldadores': soldadores })
+
