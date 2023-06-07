@@ -1,6 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from smartwelding.models import Soldador, Inspector
+from django.forms import formset_factory
+from .forms import FormMaterialesE
+
+#Creamos el formset a partir del modelo
+
+formSetmaterialesE = formset_factory(FormMaterialesE, extra=6)
+
+
 
 """"
 def miplantilla(request):

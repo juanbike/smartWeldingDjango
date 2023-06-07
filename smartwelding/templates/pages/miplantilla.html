@@ -55,6 +55,52 @@
       </div>
     </div>
   </div>
+  <form method="post">
+    {% csrf_token %}
+    {{ formset.management_form }}
+  
+    {% for form in formset %}
+      {{ form.proyecto.label_tag }}
+      {{ form.proyecto }}
+      <br>
+  
+      {{ form.inspector.label_tag }}
+      {{ form.inspector }}
+      <br>
+  
+      {{ form.soldador.label_tag }}
+      {{ form.soldador }}
+      <br>
+  
+      {{ form.tipo.label_tag }}
+      {{ form.tipo }}
+      <br>
+  
+      {{ form.colada.label_tag }}
+      {{ form.colada }}
+      <br>
+  
+      {{ form.shedule.label_tag }}
+      {{ form.shedule }}
+      <br>
+  
+      {{ form.tipoExtremo.label_tag }}
+      {{ form.tipoExtremo }}
+      <br>
+  
+      {{ form.tipoMaterial.label_tag }}
+      {{ form.tipoMaterial }}
+      <br>
+  
+      {{ form.material.label_tag }}
+      {{ form.material }}
+      <br>
+    {% endfor %}
+  
+    <button type="submit">Guardar</button>
+  </form>
+
+
 
   <script>
     flatpickr('#fecha', {

@@ -127,8 +127,6 @@ class Inspector(models.Model):
 
 
 
-
-
 class MaterialesEntregados(models.Model):
     nombreInspector = models.CharField(max_length=50, default='', null=False, blank=False)
     apellidoInspector = models.CharField(max_length=50, default='', null=False, blank=False)
@@ -267,16 +265,6 @@ class Proyecto(models.Model):
 def __str__(self):
     return f"{self.nombre}"
 
-
-class Inspector(models.Model):
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
-    telefono = models.CharField(max_length=20)
-    telefono2 = models.CharField(max_length=20, null=False, blank=True)
-    creado = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"{self.nombre} {self.apellido}  {self.telefono} {'|'} {self.telefono}2"
 
 
 #
