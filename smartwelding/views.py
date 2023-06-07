@@ -10,6 +10,7 @@ formSetmaterialesE = formset_factory(FormMaterialesE, extra=6)
 
 
 
+
 """"
 def miplantilla(request):
     titulo = 'Bienvenidos a mi vista'
@@ -23,3 +24,4 @@ def miplantilla(request):
     soldadores = Soldador.objects.all()
     print(inspectores)
     return render(request, 'pages/miplantilla.html', {'inspectores': inspectores, 'soldadores': soldadores })
+
