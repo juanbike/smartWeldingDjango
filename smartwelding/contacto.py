@@ -1,5 +1,5 @@
 from django import forms
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from requests import request
 from django.core.exceptions import ValidationError
@@ -12,6 +12,7 @@ from django.forms import formset_factory
 #1- Gestión de conjuntos de formularios en línea en Django: Importar los módulos necesarios:
 from django.forms import inlineformset_factory
 from .models import Inspector, MaterialesEntregados
+
 
 
 
@@ -97,4 +98,35 @@ class ChildModelForm(forms.ModelForm):
  
  
  #2- Cree una clase de formset en línea usando inlineformset_factory:       
-class  ChildModelFormSet = inlineformset_factory(Inspector, MaterialesEntregados, form=ChildModelForm, extra=1, can_delete=True)
+class  ChildModelFormSet : inlineformset_factory(Inspector, MaterialesEntregados, form=ChildModelForm, extra=1, can_delete=True)
+
+
+
+#4- Utilice el formset en línea en una vista de Django:
+
+def manage_children(request, parent_id=None):
+    if parent_id:
+        parent = Inspector.objects.get(pk=parent_id)
+    else:
+        parent = Inspector()
+
+    if request.method == 'POST':
+        form = ParentModelForm(request.POST, instance=parent)
+        formset = ChildModelFormSet(request.POST, instance=parent, prefix='children')
+
+        if form.is_valid() and formset.is_valid():
+            parent = form.save()
+            formset.save()
+            return redirect('parent_list')
+    else:
+        form = ParentModelForm(instance=parent)
+        formset = ChildModelFormSet(instance=parent, prefix='children')
+
+    return render(request, 'pages/manage_children.html', {'form': form, 'formset': formset})
+
+
+"""
+En esta función de vista, instanciamos el formulario principal y el conjunto de formularios en línea con datos request.
+POST si el método de solicitud es POST, y sin argumentos si el método de solicitud es GET. Luego verificamos si tanto el formulario 
+como el conjunto de formularios son válidos y guardamos las instancias en consecuencia.
+"""

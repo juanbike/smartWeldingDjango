@@ -18,11 +18,12 @@ from django.contrib import admin
 from django.urls import include, path
 #from smartwelding.views import miplantilla //asi tambien funciona
 from .views import *
-from . contacto import contacto, items
+from . contacto import contacto, items, manage_children
 urlpatterns = [
     path("juntas/", include("juntas.urls")),
     path('admin/', admin.site.urls),
     path("plantilla/", view=miplantilla, ),
     path('contacto/', contacto, name='contacto'),
-    path('items/', items, name='items')
+    path('items/', items, name='items'),
+    path('plantilla1/', manage_children, name='manage_children')
 ]
