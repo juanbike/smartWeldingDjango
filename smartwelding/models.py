@@ -141,12 +141,8 @@ class MaterialesEntregados(models.Model):
     tipoMaterialE = models.CharField(max_length=30)
     materialE = models.CharField(max_length=30)
     creado = models.DateTimeField(auto_now=True)
-    #Relacionamos MaterialesEntregados con inspector: Un inspector tiene uno o muchos materiales entregados a los soldadores
-    inspector = models.ForeignKey(Inspector, on_delete=models.CASCADE)
-
-
 def __str__(self):
-    return f"{self.tipoE} {self.tipoMaterialE}"
+    return f"{self.nombreInspector} {self.nombreSolador}"
 
 
 class junta(models.Model):

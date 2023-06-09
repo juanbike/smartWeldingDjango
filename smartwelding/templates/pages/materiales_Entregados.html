@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Listado de personas</title>
+  </head>
+  <body>
+    <h1>Materiales Entergados</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Proyecto</th>
+          <th>Inspector</th>
+          <th>Soldador/th></th>
+          <th>Tipo</th>
+          <th>Colada</th>
+          <th>Shedule</th>
+          <th>Tipo Extremo</th>
+          <th>Tipo Material</th>
+          <th>Material</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for material in materiales %}
+        <tr>
+          <td>{{ material.proyecto }}</td>
+          <td>{{ material.nombreSoldador }}</td>
+          <td>{{ material.nombreInspector }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

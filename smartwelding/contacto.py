@@ -85,7 +85,7 @@ def items(request):
 
 
 #1- Gestión de conjuntos de formularios en línea en Django:Defina los formularios del modelo padre e hijo:
-
+"""
 class ParentModelForm(forms.ModelForm):
     class Meta:
         model = Inspector
@@ -99,11 +99,11 @@ class ChildModelForm(forms.ModelForm):
  
  #2- Cree una clase de formset en línea usando inlineformset_factory:       
 class  ChildModelFormSet : inlineformset_factory(Inspector, MaterialesEntregados, form=ChildModelForm, extra=1, can_delete=True)
-
+"""
 
 
 #4- Utilice el formset en línea en una vista de Django:
-
+""""
 def manage_children(request, parent_id=None):
     if parent_id:
         parent = Inspector.objects.get(pk=parent_id)
@@ -122,7 +122,9 @@ def manage_children(request, parent_id=None):
         form = ParentModelForm(instance=parent)
         formset = ChildModelFormSet(instance=parent, prefix='children')
 
-    return render(request, 'pages/manage_children.html', {'form': form, 'formset': formset})
+   return render(request, 'pages/manage_children.html', {'form': form, 'formset': formset})
+
+"""   
 
 
 """
@@ -130,3 +132,15 @@ En esta función de vista, instanciamos el formulario principal y el conjunto de
 POST si el método de solicitud es POST, y sin argumentos si el método de solicitud es GET. Luego verificamos si tanto el formulario 
 como el conjunto de formularios son válidos y guardamos las instancias en consecuencia.
 """
+
+
+#-CREACION DE FORMULARIO PARA AGREGAR LOS MATERIALES QUE ENTREGA EL INSPECTOR AL SOLDADOR
+# PASO-1: IMPORTAMOS EL MODELO
+# PASO-2: CREAMOS UNA CLASE CON LOS CAMPOS DEL FORMULARIO
+
+class entregaMaterialesForm(forms.ModelForm):
+    class Meta:
+        model = MaterialesEntregados
+        fields = ['nombreInspector', 'apellidoInspector', 'nombreSoldador', 'apellidoSoldador', 'nombreProyecto', 'coladaE', 'tipoE', 'sheduleE', 'tipoExtremoE', 'tipoMaterialE', 'materialE']
+
+# PASO-3: CREAMOS LA VISTA, ASI QUE NOS VAMS A VIEWS.PY E IMPORTAMOS EL FORMULARIO Y CREAMOS UNA FUNCION PARA RECIBIR LA SOLICITUD HTTP DESDE EL CLIENTE
