@@ -48,7 +48,18 @@ En esta función de vista, instanciamos el formset con request.POSTdatos si el m
 Luego verificamos si el formset es válido y procesamos los datos del formulario en consecuencia.
 """    
 
-#6- cree la plantilla vaya a templates/pages/items.html
+
+"""
+PASO-4:
+La vista espera una solicitud HTTP POST que contenga datos del formulario de entrega de materiales. Si la solicitud es un POST, el código crea 
+una instancia de un formulario de entrega de materiales (usando la clase entregaMaterialesForm), y luego verifica si es válido llamando al 
+método is_valid() del formulario. Si el formulario es válido, se guarda la instancia mediante el método save(), y la vista redirecciona al 
+usuario a la página de materiales entregados.
+
+Si la solicitud no es un POST, se crea una instancia vacía del formulario de entrega de materiales y se muestra al usuario para que pueda 
+completarla. En ambos casos, el formulario se pasa al contexto de la plantilla para que pueda ser renderizado en la plantilla 
+crear_entregaMateriales.html.
+"""
 
 def crear_entregaMateriales(request):
     if request.method == 'POST':

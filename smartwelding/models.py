@@ -4,38 +4,32 @@ from django.contrib import admin
 
 
 class Usuario(models.Model):
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=50, null=False, blank=False)
+    apellido = models.CharField(max_length=50, null=False, blank=False)
     rol = models.CharField(
         max_length=25, default='Normal', null=False, blank=False)
-    telefono = models.CharField(max_length=20)
+    telefono = models.CharField(max_length=20, null=False, blank=False)
     creado = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return f"{self.nombre} {self.apellido} {self.telefono}"
 
 
 class Cliente(models.Model):
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
-    telefono = models.CharField(max_length=20)
-    direccion = models.CharField(max_length=200)
+    nombre = models.CharField(max_length=50, null=False, blank=False)
+    apellido = models.CharField(max_length=50, null=False, blank=False)
+    telefono = models.CharField(max_length=20, null=False, blank=False)
+    direccion = models.CharField(max_length=200, null=False, blank=False)
     creado = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return f"{self.nombre} {self.apellido} {self.telefono}"
 
 
 class Soldador(models.Model):
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
-    telefono = models.CharField(max_length=20)
-    edad = models.IntegerField()
-    correo_electronico = models.EmailField()
-    fecha_de_nacimiento = models.DateField()
-    altura = models.FloatField()
+    nombre = models.CharField(max_length=50, null=False, blank=False)
+    apellido = models.CharField(max_length=50, null=False, blank=False)
+    telefono = models.CharField(max_length=20, null=False, blank=False)
+    correo_electronico = models.EmailField(null=False, blank=False)
     creado = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return f"{self.nombre} {self.apellido} {self.telefono}"
 
@@ -55,7 +49,6 @@ class Empresa(models.Model):
 class Linea(models.Model):
     linea = models.CharField(max_length=100)
     creado = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return f"{self.linea}"
 
@@ -63,7 +56,6 @@ class Linea(models.Model):
 class Especificacion(models.Model):
     especificacion = models.CharField(max_length=30)
     creado = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return f"{self.especificacion}"
 
@@ -77,7 +69,6 @@ class Materiales(models.Model):
     tipoMaterial = models.CharField(max_length=30)
     material = models.CharField(max_length=30)
     creado = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return f"{self.tipo} {self.tipoMaterial}"
 
@@ -86,7 +77,6 @@ class Diametros(models.Model):
     nominal = models.CharField(max_length=8)
     nominal1 = models.FloatField()
     creado = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return f"{self.nominal} {self.nominal1}"
 
@@ -95,7 +85,6 @@ class PulgadasDiametrales(models.Model):
     factorPulgadasDiametrales = models.FloatField()
     pulgadasDiametrales = models.FloatField()
     creado = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return f"{self.factorPulgadasDiametrales} {self.pulgadasDiametrales}"
 
@@ -103,25 +92,22 @@ class PulgadasDiametrales(models.Model):
 class MaterialesConsumidos(models.Model):
     coladaC = models.CharField(
         max_length=10, default='00000000', null=False, blank=False)
-    tipoC = models.CharField(max_length=40)
-    sheduleC = models.CharField(max_length=4)
-    tipoExtremoC = models.CharField(max_length=15)
-    tipoMaterialC = models.CharField(max_length=30)
-    materialC = models.CharField(max_length=30)
+    tipoC = models.CharField(max_length=40, null=False, blank=False)
+    sheduleC = models.CharField(max_length=4, null=False, blank=False)
+    tipoExtremoC = models.CharField(max_length=15, null=False, blank=False)
+    tipoMaterialC = models.CharField(max_length=30, null=False, blank=False)
+    materialC = models.CharField(max_length=30, null=False, blank=False)
     creado = models.DateTimeField(auto_now=True)
-
-
-def __str__(self):
-    return f"{self.tipoc} {self.shedule} {self.tipoEstremoC} {self.tipoMaterialc} {self.materialC}"
+    def __str__(self):
+        return f"{self.tipoc} {self.shedule} {self.tipoEstremoC} {self.tipoMaterialc} {self.materialC}"
 
 
 class Inspector(models.Model):
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
-    telefono = models.CharField(max_length=20)
+    nombre = models.CharField(max_length=50, null=False, blank=False)
+    apellido = models.CharField(max_length=50, null=False, blank=False)
+    telefono = models.CharField(max_length=20, null=False, blank=False)
     telefono2 = models.CharField(max_length=20)
     creado = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return f"{self.nombre} {self.apellido} {self.telefono}"
 
@@ -135,26 +121,26 @@ class MaterialesEntregados(models.Model):
     nombreProyecto = models.CharField(50, default='', null=False, blank=False)
     coladaE = models.CharField(
         max_length=10, default='00000000', null=False, blank=False)
-    tipoE = models.CharField(max_length=40)
-    sheduleE = models.CharField(max_length=4)
-    tipoExtremoE = models.CharField(max_length=15)
-    tipoMaterialE = models.CharField(max_length=30)
-    materialE = models.CharField(max_length=30)
+    tipoE = models.CharField(max_length=40, null=False, blank=False)
+    sheduleE = models.CharField(max_length=4, null=False, blank=False)
+    tipoExtremoE = models.CharField(max_length=15, null=False, blank=False)
+    tipoMaterialE = models.CharField(max_length=30, null=False, blank=False)
+    materialE = models.CharField(max_length=30, null=False, blank=False)
     creado = models.DateTimeField(auto_now=True)
-def __str__(self):
-    return f"{self.nombreInspector} {self.nombreSolador}"
+    def __str__(self):
+        return f"{self.nombreInspector} {self.nombreSolador}"
 
 
 class junta(models.Model):
-    tipoJunta = models.CharField(max_length=20)
-    linea = models.CharField(max_length=100)
-    especificacion = models.CharField(max_length=30)
-    tipo = models.CharField(max_length=40)
-    shedule = models.CharField(max_length=4)
-    tipoExtremo = models.CharField(max_length=15)
-    tipoMaterial = models.CharField(max_length=30)
-    material = models.CharField(max_length=30)
-    nominal = models.CharField(max_length=4)
+    tipoJunta = models.CharField(max_length=20, null=False, blank=False)
+    linea = models.CharField(max_length=100, null=False, blank=False)
+    especificacion = models.CharField(max_length=30, null=False, blank=False)
+    tipo = models.CharField(max_length=40, null=False, blank=False)
+    shedule = models.CharField(max_length=4, null=False, blank=False)
+    tipoExtremo = models.CharField(max_length=15, null=False, blank=False)
+    tipoMaterial = models.CharField(max_length=30, null=False, blank=False)
+    material = models.CharField(max_length=30, null=False, blank=False)
+    nominal = models.CharField(max_length=4, null=False, blank=False)
     nominal1 = models.FloatField()
     factorPulgadasDiametrales = models.FloatField()
     pulgadasDiametrales = models.FloatField()
@@ -202,10 +188,8 @@ class juntaRechazada(models.Model):
     pulgadasDiametrales = models.FloatField(null=False, blank=False)
     pulgadasContabilizadas = models.IntegerField(null=False, blank=False)
     creado = models.DateTimeField(auto_now=True)
-
-
-def __str__(self):
-    return f"{self.linea} {self.creado}"
+    def __str__(self):
+        return f"{self.linea} {self.creado}"
 
 
 class PruebaHidrostatica(models.Model):
@@ -246,20 +230,16 @@ class PruebaHidrostatica(models.Model):
     dictamen = models.CharField(
         200, default="Dictamen", null=False, blank=False)
     creado = models.DateTimeField(auto_now=True)
-
-
-def __str__(self):
-    return f"{self.nombreInspector} {self.apellidoInspector}"
+    def __str__(self):
+        return f"{self.nombreInspector} {self.apellidoInspector}"
 
 
 class Proyecto(models.Model):
     fecha = models.DateField()
-    nombre = models.CharField(50)
-    lugar = models.CharField(40)
-
-
-def __str__(self):
-    return f"{self.nombre}"
+    nombre = models.CharField(50, null=False, blank=False)
+    lugar = models.CharField(40, null=False, blank=False)
+    def __str__(self):
+        return f"{self.nombre}"
 
 
 

@@ -70,7 +70,7 @@ La función formset_factory crea una clase de conjunto de formularios para el fo
  vacíos que se mostrarán inicialmente, que se establece en 1 en este ejemplo.
 """
 
-
+#-4- Definimos una funcion que maneje las solicitudes http del cliente y renderice el formulario
 def items(request):
     if request.method == 'POST':
         formset = ItemFormSet(request.POST, prefix='items')
@@ -136,11 +136,12 @@ como el conjunto de formularios son válidos y guardamos las instancias en conse
 
 #-CREACION DE FORMULARIO PARA AGREGAR LOS MATERIALES QUE ENTREGA EL INSPECTOR AL SOLDADOR
 # PASO-1: IMPORTAMOS EL MODELO
-# PASO-2: CREAMOS UNA CLASE CON LOS CAMPOS DEL FORMULARIO
+# PASO-2: CREAMOS UNA CLASE FORMULARIO CON LOS CAMPOS DEL MODELO, EN ESTE CASO MaterialesEntragados
 
 class entregaMaterialesForm(forms.ModelForm):
     class Meta:
         model = MaterialesEntregados
-        fields = ['nombreInspector', 'apellidoInspector', 'nombreSoldador', 'apellidoSoldador', 'nombreProyecto', 'coladaE', 'tipoE', 'sheduleE', 'tipoExtremoE', 'tipoMaterialE', 'materialE']
+        fields = ['nombreInspector', 'apellidoInspector', 'nombreSoldador', 'apellidoSoldador', 'nombreProyecto', 'coladaE', 'tipoE', 'sheduleE', 'tipoExtremoE', 
+                  'tipoMaterialE', 'materialE']
 
 # PASO-3: CREAMOS LA VISTA, ASI QUE NOS VAMS A VIEWS.PY E IMPORTAMOS EL FORMULARIO Y CREAMOS UNA FUNCION PARA RECIBIR LA SOLICITUD HTTP DESDE EL CLIENTE
