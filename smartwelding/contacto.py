@@ -138,6 +138,7 @@ como el conjunto de formularios son válidos y guardamos las instancias en conse
 # PASO-1: IMPORTAMOS EL MODELO
 # PASO-2: CREAMOS UNA CLASE FORMULARIO CON LOS CAMPOS DEL MODELO, EN ESTE CASO MaterialesEntragados
 
+"""
 class entregaMaterialesForm(forms.ModelForm):
     class Meta:
         model = MaterialesEntregados
@@ -145,3 +146,4 @@ class entregaMaterialesForm(forms.ModelForm):
                   'tipoMaterialE', 'materialE']
 
 # PASO-3: CREAMOS LA VISTA, ASI QUE NOS VAMS A VIEWS.PY E IMPORTAMOS EL FORMULARIO Y CREAMOS UNA FUNCION PARA RECIBIR LA SOLICITUD HTTP DESDE EL CLIENTE
+"""

@@ -111,24 +111,35 @@ class Inspector(models.Model):
     def __str__(self):
         return f"{self.nombre} {self.apellido} {self.telefono}"
 
-
+class Proyecto(models.Model):
+    fecha = models.DateField()
+    nombre = models.CharField(50, null=False, blank=False)
+    lugar = models.CharField(40, null=False, blank=False)
+    def __str__(self):
+        return f"{self.nombre}"
 
 class MaterialesEntregados(models.Model):
-    nombreInspector = models.CharField(max_length=50, default='', null=False, blank=False)
-    apellidoInspector = models.CharField(max_length=50, default='', null=False, blank=False)
-    nombreSoldador = models.CharField(max_length=50, default='', null=False, blank=False)
-    apellidoSoldador = models.CharField(max_length=50, default='', null=False, blank=False)
-    nombreProyecto = models.CharField(50, default='', null=False, blank=False)
-    coladaE = models.CharField(
-        max_length=10, default='00000000', null=False, blank=False)
-    tipoE = models.CharField(max_length=40, null=False, blank=False)
-    sheduleE = models.CharField(max_length=4, null=False, blank=False)
-    tipoExtremoE = models.CharField(max_length=15, null=False, blank=False)
-    tipoMaterialE = models.CharField(max_length=30, null=False, blank=False)
-    materialE = models.CharField(max_length=30, null=False, blank=False)
+    
+    inspector = models.ForeignKey(Inspector, on_delete=models.CASCADE, default='Inspector')
+    soldador = models.ForeignKey(Soldador, on_delete=models.CASCADE, default='Soldador')
+    proyecto = models.ForeignKey(Proyecto,on_delete=models.CASCADE, default='Proyecto' )
+    material = models.ForeignKey(Materiales, on_delete=models.CASCADE)
     creado = models.DateTimeField(auto_now=True)
     def __str__(self):
         return f"{self.nombreInspector} {self.nombreSolador}"
+    
+    #nombreInspector = models.CharField(max_length=50, default='', null=False, blank=False)
+    #apellidoInspector = models.CharField(max_length=50, default='', null=False, blank=False)   
+    #nombreSoldador = models.CharField(max_length=50, default='', null=False, blank=False)
+    #apellidoSoldador = models.CharField(max_length=50, default='', null=False, blank=False)
+    #nombreProyecto = models.CharField(50, default='', null=False, blank=False)
+    #coladaE = models.CharField(max_length=10, default='00000000', null=False, blank=False)
+    #tipoE = models.CharField(max_length=40, null=False, blank=False)
+    #sheduleE = models.CharField(max_length=4, null=False, blank=False)
+    #tipoExtremoE = models.CharField(max_length=15, null=False, blank=False)
+    #tipoMaterialE = models.CharField(max_length=30, null=False, blank=False)
+    #materialE = models.CharField(max_length=30, null=False, blank=False)
+    
 
 
 class junta(models.Model):
@@ -234,12 +245,7 @@ class PruebaHidrostatica(models.Model):
         return f"{self.nombreInspector} {self.apellidoInspector}"
 
 
-class Proyecto(models.Model):
-    fecha = models.DateField()
-    nombre = models.CharField(50, null=False, blank=False)
-    lugar = models.CharField(40, null=False, blank=False)
-    def __str__(self):
-        return f"{self.nombre}"
+
 
 
 

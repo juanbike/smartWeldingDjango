@@ -2,15 +2,15 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from smartwelding.models import Soldador, Inspector
 from django.forms import formset_factory
-from .forms import FormMaterialesE
-from .contacto import entregaMaterialesForm
+#from .forms import FormMaterialesE
+#from .contacto import entregaMaterialesForm
 
 #4- Creando un formset basico: Importamos la clsae formset creada en contacto.py
 #from .forms import ItemFormSet
 
 #Creamos el formset a partir del modelo
 
-formSetmaterialesE = formset_factory(FormMaterialesE, extra=6)
+#formSetmaterialesE = formset_factory(FormMaterialesE, extra=6)
 
 
 
@@ -61,6 +61,8 @@ completarla. En ambos casos, el formulario se pasa al contexto de la plantilla p
 crear_entregaMateriales.html.
 """
 
+
+"""
 def crear_entregaMateriales(request):
     if request.method == 'POST':
         form = entregaMaterialesForm(request.POST)
@@ -70,3 +72,4 @@ def crear_entregaMateriales(request):
     else:
         form = entregaMaterialesForm()
     return render(request, 'pages/crear_entregaMateriales.html', {'form': form})
+"""    
