@@ -1,16 +1,30 @@
-{% extends 'base.html' %}
-
-{% block content %}
-  <h1>Manage Children</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    {{ formset.management_form }}
-    {% for form in formset %}
-      <div class="form-row">
-        {{ form.as_p }}
-      </div>
+{% extends 'base.html' %} {% block content %}
+<h1>Entega de Materiales</h1>
+<form method="post">
+  {% csrf_token %} 
+  
+  <div class="col-3 p-1">
+    <h1>Inspectores</h1>
+    <select class="form-select me-3" aria-label="Default select example">
+        {% for inspector in inspectores %}
+        <option value={{ inspector.nombre }}>{{ inspector.nombre }} - {{ inspector.apellido }}</option>
     {% endfor %}
-    <button type="submit">Submit</button>
-  </form>
+    </select>
+</div>
+<div class="col-3 p-1">
+  <h1>Soldadores</h1>
+  <select class="form-select me-3" aria-label="Default select example">
+      {% for soldador in soldadores %}
+      <option value={{ soldador.nombre }}>{{ soldador.nombre }} - {{ soldador.apellido }}</option>
+  {% endfor %}
+  </select>
+</div>
+
+
+   {{ formset.management_form }}
+    {% for form in  formset %}
+      <div class="form-row">{{ form.as_p }}</div>
+    {% endfor %}
+  <button type="submit">Guardar</button>
+</form>
 {% endblock %}

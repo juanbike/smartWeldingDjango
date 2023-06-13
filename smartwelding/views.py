@@ -1,18 +1,17 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
-from smartwelding.models import Soldador, Inspector
-from django.forms import formset_factory
-#from .forms import FormMaterialesE
-#from .contacto import entregaMaterialesForm
-
-#4- Creando un formset basico: Importamos la clsae formset creada en contacto.py
-#from .forms import ItemFormSet
-
-#Creamos el formset a partir del modelo
-
-#formSetmaterialesE = formset_factory(FormMaterialesE, extra=6)
+from smartwelding.models import Soldador, Inspector, Materiales, MaterialesEntregados
 
 
+# Configuracion del modelo en linea para los materiales entregados
+from .forms import FormMateriales, MateialesFormSet
+# from .contacto import entregaMaterialesForm
+
+# 4- Creando un formset basico: Importamos la clsae formset creada en contacto.py
+# from .forms import ItemFormSet
+
+# Creamos el formset a partir del modelo
+
+# formSetmaterialesE = formset_factory(FormMaterialesE, extra=6)
 
 
 """"
@@ -27,26 +26,40 @@ def miplantilla(request):
     inspectores = Inspector.objects.all()
     soldadores = Soldador.objects.all()
     print(inspectores)
-    return render(request, 'pages/miplantilla.html', {'inspectores': inspectores, 'soldadores': soldadores })
+    return render(request, 'pages/miplantilla.html', {'inspectores': inspectores, 'soldadores': soldadores})
 
-#5- viene de contacto.py cree una función de vista que maneje las solicitudes GET y POST
-"""
-def items(request):
-    if request.method == 'POST':
-        formset = ItemFormSet(request.POST, prefix='items')
-        if formset.is_valid():
-            # Process the form data (e.g., save to the database, send an email, etc.)
-            pass
+# Configuracion del modelo en linea para los materiales entregados: Función que recibe las solicitudes Get y Post para agregar materiales
+
+
+def materiales_entregados(request, parent_id=None):
+    inspectores = Inspector.objects.all()
+    soldadores = Soldador.objects.all()
+    context = {'inspectores': inspectores, 'soldadores': soldadores}
+    if parent_id:
+        parent = Materiales.objects.get(pk=parent_id)
     else:
-        formset = ItemFormSet(prefix='items')
+        parent = Materiales()
 
-    return render(request, 'pages/items.html', {'formset': formset})
-"""    
+    if request.method == 'POST':
+        form = FormMateriales(request.POST, instance=parent)
+        formset = MateialesFormSet(
+            request.POST, instance=parent, prefix='children')
+
+        if form.is_valid() and formset.is_valid():
+            parent = form.save()
+            formset.save()
+           # return redirect('parent_list')
+    else:
+        form = FormMateriales(instance=parent)
+        formset = MateialesFormSet(instance=parent, prefix='children')
+
+    return render(request, 'pages/manage_children.html', {'form': form, 'formset': formset, 'inspectores': inspectores, 'soldadores': soldadores})
+
 
 """
 En esta función de vista, instanciamos el formset con request.POSTdatos si el método de solicitud es POST y sin argumentos si el método de solicitud es GET.
 Luego verificamos si el formset es válido y procesamos los datos del formulario en consecuencia.
-"""    
+"""
 
 
 """
@@ -72,4 +85,4 @@ def crear_entregaMateriales(request):
     else:
         form = entregaMaterialesForm()
     return render(request, 'pages/crear_entregaMateriales.html', {'form': form})
-"""    
+"""

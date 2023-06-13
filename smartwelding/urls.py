@@ -25,5 +25,5 @@ urlpatterns = [
     path("plantilla/", view=miplantilla, ),
     path('contacto/', contacto, name='contacto'),
     path('items/', items, name='items'),
-   # path('Amateriales/', crear_entregaMateriales, name='crear_entregaMateriales')
+    path('Amateriales/', materiales_entregados, name='materiales_entregados')
 ]
