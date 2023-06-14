@@ -25,6 +25,7 @@ def miplantilla(request):
 def miplantilla(request):
     inspectores = Inspector.objects.all()
     soldadores = Soldador.objects.all()
+   
     print(inspectores)
     return render(request, 'pages/miplantilla.html', {'inspectores': inspectores, 'soldadores': soldadores})
 
@@ -34,6 +35,7 @@ def miplantilla(request):
 def materiales_entregados(request, parent_id=None):
     inspectores = Inspector.objects.all()
     soldadores = Soldador.objects.all()
+    materiales = Materiales.objects.all()
     context = {'inspectores': inspectores, 'soldadores': soldadores}
     if parent_id:
         parent = Materiales.objects.get(pk=parent_id)
@@ -53,7 +55,7 @@ def materiales_entregados(request, parent_id=None):
         form = FormMateriales(instance=parent)
         formset = MateialesFormSet(instance=parent, prefix='children')
 
-    return render(request, 'pages/manage_children.html', {'form': form, 'formset': formset, 'inspectores': inspectores, 'soldadores': soldadores})
+    return render(request, 'pages/manage_children.html', {'form': form, 'formset': formset, 'inspectores': inspectores, 'soldadores': soldadores, 'materiales': materiales})
 
 
 """

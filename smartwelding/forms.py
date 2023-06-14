@@ -26,6 +26,6 @@ class FormMaterialesEntegados(forms.ModelForm):
         fields =['tipoE', 'tipoExtremoE', 'coladaE', 'sheduleE', 'tipoMaterialE', 'materialE' ]
 
 
-MateialesFormSet = inlineformset_factory(Materiales, MaterialesEntregados, form= FormMaterialesEntegados, extra=2)    
+MateialesFormSet = inlineformset_factory(Materiales, MaterialesEntregados, form= FormMaterialesEntegados, extra=4)    
 
 
