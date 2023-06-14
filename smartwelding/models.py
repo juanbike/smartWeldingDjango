@@ -133,7 +133,7 @@ class Proyecto(models.Model):
 class MaterialesEntregados(models.Model):
 
     inspector = models.ForeignKey(Inspector, on_delete=models.CASCADE)
-    #soldador = models.ForeignKey(Soldador, on_delete=models.CASCADE)
+    soldador = models.ForeignKey(Soldador, on_delete=models.CASCADE)
     proyecto = models.ForeignKey( Proyecto, on_delete=models.CASCADE)
     material = models.ForeignKey(Materiales, on_delete=models.CASCADE)
     creado = models.DateTimeField(auto_now=True)

@@ -3,7 +3,8 @@ from smartwelding.models import Soldador, Inspector, Materiales, MaterialesEntre
 
 
 # Configuracion del modelo en linea para los materiales entregados
-from .forms import FormMateriales, MateialesFormSet
+from .forms import FormMateriales, MaterialesFormSet
+
 # from .contacto import entregaMaterialesForm
 
 # 4- Creando un formset basico: Importamos la clsae formset creada en contacto.py
@@ -44,7 +45,7 @@ def materiales_entregados(request, parent_id=None):
 
     if request.method == 'POST':
         form = FormMateriales(request.POST, instance=parent)
-        formset = MateialesFormSet(
+        formset = MaterialesFormSet(
             request.POST, instance=parent, prefix='children')
 
         if form.is_valid() and formset.is_valid():
@@ -53,7 +54,7 @@ def materiales_entregados(request, parent_id=None):
            # return redirect('parent_list')
     else:
         form = FormMateriales(instance=parent)
-        formset = MateialesFormSet(instance=parent, prefix='children')
+        formset = MaterialesFormSet(instance=parent, prefix='children')
 
     return render(request, 'pages/manage_children.html', {'form': form, 'formset': formset, 'inspectores': inspectores, 'soldadores': soldadores, 'materiales': materiales})
 

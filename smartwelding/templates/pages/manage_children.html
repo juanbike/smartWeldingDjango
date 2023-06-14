@@ -6,92 +6,112 @@
     </div>
   </div>
 </div>
-<form method="post">
-  {% csrf_token %} 
+
+
+
+<form method="post" id="formMat">
+    {% csrf_token %} 
   
-<div class="d-flex justify-content-center"> 
-    <div class="col-3 p-1">
-      <h1>Inspector</h1>
-      <select class="form-select me-3" aria-label="Default select example">
-          {% for inspector in inspectores %}
-          <option value={{ inspector.nombre }}>{{ inspector.nombre }} - {{ inspector.apellido }}</option>
-      {% endfor %}
-      </select>
+    <div class="d-flex justify-content-center"> 
+        <div class="col-3 p-1">
+          <h1>Inspector</h1>
+            <select class="form-select me-3" aria-label="Default select example">
+                {% for inspector in inspectores %}
+                <option value={{ inspector.nombre }}>{{ inspector.nombre }} - {{ inspector.apellido }}</option>
+            {% endfor %}
+            </select>
+        </div>
+
+          <div class="col-3 p-1">
+            <h1>Soldador</h1>
+            <select class="form-select me-3" aria-label="Default select example">
+              {% for soldador in soldadores %}
+                <option value={{ soldador.nombre }}>{{ soldador.nombre }} - {{ soldador.apellido }}</option>
+              {% endfor %}
+            </select>
+          </div>
     </div>
 
-  <div class="col-3 p-1">
-    <h1>Soldador</h1>
-    <select class="form-select me-3" aria-label="Default select example">
-      {% for soldador in soldadores %}
-        <option value={{ soldador.nombre }}>{{ soldador.nombre }} - {{ soldador.apellido }}</option>
-      {% endfor %}
-    </select>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h1 class="text-center display-4">Agregar Materiales</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1 class="text-center display-4">Agregar Materiales</h1>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<div class="d-flex justify-content-center"> 
    {{ formset.management_form }}
     {% for form in  formset %}
-    <div class="col-3 p-1">
-      <h5>Shedule</h5>
-        <select class="form-select me-3" aria-label="Default select example">
-          {% for material in materiales %}
-            <option >{{ material.shedule }} </option>
-          {% endfor %}
-        </select>
-    </div>    
+    <div class="d-flex justify-content-center"> 
+        <div class="col-1 p-1">
+          <h5>Tipo</h5>
+            <select class="form-select me-3" aria-label="Default select example">
+              {% for material in materiales %}
+                <option >{{ material.tipo }} </option>
+              {% endfor %}
+            </select>
+        </div>
 
-    <div class="col-3 p-1">
-        <h5>Tipo Extremo</h5>
-        <select class="form-select me-3" aria-label="Default select example">
-          {% for material in materiales %}
-            <option > {{ material.tipoExtremo }}</option>
-          {% endfor %}
-        </select>
+        <div class="col-1 p-1">
+          
+          <label for="inputColada"><h5>Colada<h5></label>
+          <input type="text" class="form-control" id="inputColada" placeholder="00000000" required>
+            <div class="invalid-feedback">
+              Por favor ingresa la Colada.
+            </div>
+        </div>
 
-      </div>    
+        <div class="col-1 p-1">
+          <h5>Shedule</h5>
+            <select class="form-select me-3" aria-label="Default select example">
+              {% for material in materiales %}
+                <option >{{ material.shedule }} </option>
+              {% endfor %}
+            </select>
+        </div>    
 
-      <div class="col-3 p-1">
-        <h5>Tipo Material</h5>
-        <select class="form-select me-3" aria-label="Default select example">
-          {% for material in materiales %}
-            <option > {{ material.tipoMaterial }}</option>
-          {% endfor %}
-        </select>
-      </div>  
+        <div class="col-1 p-1">
+            <h5>Tipo Extremo</h5>
+            <select class="form-select me-3" aria-label="Default select example">
+              {% for material in materiales %}
+                <option > {{ material.tipoExtremo }}</option>
+              {% endfor %}
+            </select>
+        </div>    
 
-      <div class="col-3 p-1">
-        <h5>Colada</h5>
-        <select class="form-select me-3" aria-label="Default select example">
-          {% for material in materiales %}
-            <option > {{ material.colda }}</option>
-          {% endfor %}
-        </select>
-      </div>
+        <div class="col-1 p-1">
+            <h5>Tipo Material</h5>
+            <select class="form-select me-3" aria-label="Default select example">
+              {% for material in materiales %}
+                <option > {{ material.tipoMaterial }}</option>
+              {% endfor %}
+            </select>
+        </div>  
 
-      <div class="col-3 p-1">
-        <h5>Material</h5>
-        <select class="form-select me-3" aria-label="Default select example">
-          {% for material in materiales %}
-            <option > {{ material.Material }}</option>
-          {% endfor %}
-        </select>
-      </div>
+        <div class="col-1 p-1">
+            <h5>Material</h5>
+            <select class="form-select me-3" aria-label="Default select example">
+              {% for material in materiales %}
+                <option > {{ material.material }}</option>
+              {% endfor %}
+            </select>
+        </div>
 
+    </div>  
 
-
-    {% endfor %}
-</div>
-
-    
+  {% endfor %}
+ 
   <button type="submit">Guardar</button>
 </form>
+
+
+<script>
+  document.querySelector('#formMat').addEventListener('submit', function(event) {
+    var inputColada = document.querySelector('#inputColada');
+    if (inputColdada.value.length === 0) {
+      inputColada.classList.add('is-invalid');
+      event.preventDefault();
+    }
+  });
+</script>
 {% endblock %}
