@@ -9,7 +9,7 @@ from .models import Materiales,  MaterialesEntregados, Inspector, Soldador
 
 # ------------- Defnimos los formularios Padre - hijo ------------------------
 
-# Formulario Padre
+# ----- FORMULARIO PADRE O  FORM---------------
 
 class FormMateriales(forms.ModelForm):
     class Meta:
@@ -19,7 +19,9 @@ class FormMateriales(forms.ModelForm):
         model = Soldador
         fields = ['nombre', 'apellido']
         opciones = forms.ModelChoiceField(queryset=Inspector.objects.all())
-# Formulario Hijo
+
+
+# ------ FORMULARIO HIJO O FORMSET ------------
 class FormMaterialesEntegados(forms.ModelForm):
     class Meta:
         model = MaterialesEntregados

@@ -33,11 +33,11 @@ def miplantilla(request):
 # Configuracion del modelo en linea para los materiales entregados: Función que recibe las solicitudes Get y Post para agregar materiales
 
 
-def materiales_entregados(request, parent_id=None):
+def agregar_materiales_entregados(request, parent_id=None):
     inspectores = Inspector.objects.all()
     soldadores = Soldador.objects.all()
     materiales = Materiales.objects.all()
-    context = {'inspectores': inspectores, 'soldadores': soldadores}
+   
     if parent_id:
         parent = Materiales.objects.get(pk=parent_id)
     else:
@@ -49,14 +49,28 @@ def materiales_entregados(request, parent_id=None):
             request.POST, instance=parent, prefix='children')
 
         if form.is_valid() and formset.is_valid():
-            parent = form.save()
+            #parent = form.save()
+            #Crea una instancia de MaterialesEntregados con los datos del formulario
+            materiales_entregados = MaterialesEntregados(
+                nommbreInspector=form.cleaned_data['nommbreInspector'],
+                apellidoInspector=form.cleaned_data['apellidoInspector'],
+                nombreSoldador=form.cleaned_data['nombreSoldador'],
+                apellidoSoldador=form.cleaned_data['apellidoSoldador'],
+                coladaE=form.cleaned_data['coladaE'],
+                tipoE=form.cleaned_data['tipoE'],
+                sheduleE=form.cleaned_data['sheduleE'],
+                tipoExtremoE=form.cleaned_data['tipoExtremoE'],
+                tipoMaterialE=form.cleaned_data['tipoMaterialE'],
+                materialE=form.cleaned_data[' materialE'],
+            )
+            materiales_entregados.save()
             formset.save()
            # return redirect('parent_list')
     else:
         form = FormMateriales(instance=parent)
         formset = MaterialesFormSet(instance=parent, prefix='children')
-
-    return render(request, 'pages/manage_children.html', {'form': form, 'formset': formset, 'inspectores': inspectores, 'soldadores': soldadores, 'materiales': materiales})
+    context = {'form': form, 'formset': formset, 'inspectores': inspectores, 'soldadores': soldadores, 'materiales': materiales}
+    return render(request, 'pages/manage_children.html', context)
 
 
 """
