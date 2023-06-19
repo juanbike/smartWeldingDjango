@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import inlineformset_factory
-from .models import Materiales,  MaterialesEntregados, Inspector, Soldador
+from .models import (Materiales,  MaterialesEntregados, Inspector, Soldador)
 
 
 
@@ -14,11 +14,11 @@ from .models import Materiales,  MaterialesEntregados, Inspector, Soldador
 class FormMateriales(forms.ModelForm):
     class Meta:
         model = Inspector
-        fields = ['nombreI', 'apellidoI'],
+        fields = ['nombre', 'apellido'],
     class Meta:    
         model = Soldador
         fields = ['nombre', 'apellido']
-        opciones = forms.ModelChoiceField(queryset=Inspector.objects.all())
+       
 
 
 # ------ FORMULARIO HIJO O FORMSET ------------
