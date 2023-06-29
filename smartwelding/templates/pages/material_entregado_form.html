@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ formset.management_form }}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Inspector</th>
+          <th>Soldador</th>
+          <th>Tipo</th>
+          <th>Colada</th>
+          <th>Schedule</th>
+          <th>Tipo de Material</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for form in formset %}
+
+        <tr>
+          <td>{{ form.inspector }}</td>
+          <td>{{ form.soldador }}</td>
+          <td>{{ form.tipo }}</td>
+          <td>{{ form.colada }}</td>
+          <td>{{ form.schedule }}</td>
+          <td>{{ form.tipo_material }}</td>
+          <td>{{ form.DELETE }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <input type="submit" value="Guardar" class="btn btn-primary">
+  </form>
+{% endblock %}

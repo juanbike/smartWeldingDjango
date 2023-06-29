@@ -16,7 +16,7 @@ Incluir otra URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-#from smartwelding.views import miplantilla //asi tambien funciona
+from smartwelding.views import miplantilla, MaterialEntregadoCreateView 
 from .views import *
 from . contacto import contacto, items
 urlpatterns = [
@@ -25,5 +25,5 @@ urlpatterns = [
     path("plantilla/", view=miplantilla, ),
     path('contacto/', contacto, name='contacto'),
     path('items/', items, name='items'),
-    path('Amateriales/', agregar_materiales_entregados, name='materiales_entregados')
+    path('material-entregado/create/',  MaterialEntregadoCreateView.as_view(), name='material_entregado_create')
 ]

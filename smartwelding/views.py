@@ -1,9 +1,20 @@
 from django.shortcuts import redirect, render
-from smartwelding.models import Soldador, Inspector, Materiales, MaterialesEntregados
+#from smartwelding.models import Soldador, Inspector, Materiales, MaterialesEntregados
 
 
 # Configuracion del modelo en linea para los materiales entregados
-from .forms import FormMateriales, MaterialesFormSet
+#from .forms import FormMateriales, MaterialesFormSet
+
+
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView
+from django.views.generic import TemplateView
+from smartwelding.models import Inspector
+
+from .forms import MaterialEntregadoForm, MaterialEntregadoFormSetFactory
+
+
+
 
 # from .contacto import entregaMaterialesForm
 
@@ -15,13 +26,44 @@ from .forms import FormMateriales, MaterialesFormSet
 # formSetmaterialesE = formset_factory(FormMaterialesE, extra=6)
 
 
-""""
+
 def miplantilla(request):
     titulo = 'Bienvenidos a mi vista'
     contenido = 'Esta es una plantilla en Django'
     return render(request, 'pages/miplantilla.html', {'titulo': titulo, 'contenido': contenido})
-"""
 
+
+class MaterialEntregadoCreateView(CreateView):
+    model = Inspector
+    template_name = 'pages/material_entregado_form.html'
+    form_class = MaterialEntregadoForm
+    success_url = reverse_lazy('material_entregado_list')
+
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        if self.request.POST:
+            data['formset'] = MaterialEntregadoFormSetFactory(
+                self.request.POST, instance=self.object
+            )
+        else:
+            data['formset'] = MaterialEntregadoFormSetFactory(instance=self.object)
+        return data
+    
+    def form_valid(self, form):
+        context = self.get_context_data()
+        formset = context['formset']
+        if formset.is_valid():
+            self.object = form.save()
+            formset.instance = self.object
+            formset.save()
+            return super().form_valid(form)
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
+
+
+
+"""
 
 def miplantilla(request):
     inspectores = Inspector.objects.all()
@@ -48,6 +90,11 @@ def agregar_materiales_entregados(request, parent_id=None):
         formset = MaterialesFormSet(
             request.POST, instance=parent, prefix='children')
 
+        if form.is_valid():
+            print("form es valido")
+            
+        if formset.is_valid():
+            print("formset es valido")    
         if form.is_valid() and formset.is_valid():
             #parent = form.save()
             #Crea una instancia de MaterialesEntregados con los datos del formulario
@@ -71,6 +118,8 @@ def agregar_materiales_entregados(request, parent_id=None):
         formset = MaterialesFormSet(instance=parent, prefix='children')
     context = {'form': form, 'formset': formset, 'inspectores': inspectores, 'soldadores': soldadores, 'materiales': materiales}
     return render(request, 'pages/manage_children.html', context)
+"""
+
 
 
 """
